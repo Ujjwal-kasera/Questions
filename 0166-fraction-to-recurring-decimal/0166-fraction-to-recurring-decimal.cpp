@@ -6,8 +6,8 @@ public:
         string res="";
         if(numerator<0 ^ denominator<0)
             res+="-";
-        long num=abs((long)numerator);
-        long dec=abs((long)denominator);
+        long num=abs(numerator);
+        long dec=abs(denominator);
         long q=num/dec;
         long r=num%dec;
         res+=to_string(q);
@@ -26,7 +26,7 @@ public:
             mp[r]=res.size();
             r*=10;
             q=r/dec;
-            r=r%dec;
+            r%=dec;
             res+=to_string(q);
             }
         }
