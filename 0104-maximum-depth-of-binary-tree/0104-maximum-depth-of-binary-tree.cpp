@@ -16,7 +16,6 @@ public:
             return 0;
         int h1=maxDepth(root->left);
         int h2=maxDepth(root->right);
-        int h=max(h1,h2)+1;
-        return h;
+        return max(h1,h2)+1;;
     }
 };
