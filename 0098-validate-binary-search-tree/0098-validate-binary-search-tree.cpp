@@ -32,15 +32,10 @@ public:
     bool isBST(TreeNode* root,long mini,long maxi){
         if(root==NULL)
             return true;
-        if(root->val>mini && root->val<maxi){
-            bool left=isBST(root->left,mini,root->val);
-            bool right=isBST(root->right,root->val,maxi);
-            if(left && right)
-                return true;
+        if(root->val<=mini || root->val>=maxi){
+            return false;
         }
-        // else if((root->left==NULL && root->right==NULL))
-        //     return true;
-        return false;
+        return (isBST(root->left,mini,root->val) && isBST(root->right,root->val,maxi));
     }
     bool isValidBST(TreeNode* root) {
         long mini=-2147483649;
