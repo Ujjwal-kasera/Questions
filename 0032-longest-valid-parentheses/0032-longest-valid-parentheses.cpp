@@ -16,33 +16,31 @@ public:
         // return ans;
         
         int len=s.size();
-        int open=0;
-        int close=0;
+        int lopen=0;
+        int lclose=0;
+        int ropen=0;
+        int rclose=0;
         int ans=0;
         for(int i=0;i<len;i++){
             if(s[i]=='(')
-                open++;
+                lopen++;
             else
-                close++;
+                lclose++;
             
-            if(open==close)
-                ans=max(ans,2*close);
-            if(close>open){
-                open=close=0;
-            }
-        }
-        open=close=0;
-        for(int i=len-1;i>=0;i--){
-            if(s[i]=='(')
-                open++;
+            if(s[len-i-1]=='(')
+                ropen++;
             else
-                close++;
+                rclose++;
             
-            if(open==close)
-                ans=max(ans,open+close);
-            if(open>close){
-                open=close=0;
-            }
+            if(lopen==lclose)
+                ans=max(ans,lopen+lclose);
+            if(lclose>lopen)
+                lopen=lclose=0;
+            
+            if(ropen==rclose)
+                ans=max(ans,ropen+rclose);
+            if(ropen>rclose)
+                ropen=rclose=0;
         }
         return ans;
     }
