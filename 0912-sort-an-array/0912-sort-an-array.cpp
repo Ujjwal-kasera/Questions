@@ -30,9 +30,29 @@ class Solution {
     //     }
     //     return;
     // }
+    void heapify(vector<int>&nums,int size,int index){
+        int largest=index;
+        int left=2*index+1;
+        int right=2*index+2;
+        if(left<size && nums[largest]<nums[left])
+            largest=left;
+        if(right<size && nums[largest]<nums[right])
+            largest=right;
+        if(largest!=index){
+            swap(nums[largest],nums[index]);
+            heapify(nums,size,largest);
+        }
+    }
 public:
     vector<int> sortArray(vector<int>& nums) {
-        sort(nums.begin(),nums.end());
+        int len=nums.size();
+        for(int i=len/2-1;i>=0;i--)
+            heapify(nums,len,i);
+        while(len>1){
+            swap(nums[0],nums[len-1]);
+            len--;
+            heapify(nums,len,0);
+        }
         return nums;
     }
 };
