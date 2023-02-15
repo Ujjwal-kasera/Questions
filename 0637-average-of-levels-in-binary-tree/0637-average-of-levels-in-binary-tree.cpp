@@ -22,7 +22,7 @@ public:
         double temp;
         while(!q.empty()){
             len=q.size();
-            temp={};
+            temp=0;
             for(int i=0;i<len;i++){
                 curr=q.front();
                 q.pop();
