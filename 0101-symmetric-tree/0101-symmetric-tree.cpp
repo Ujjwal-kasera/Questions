@@ -15,12 +15,9 @@ class Solution {
             return true;
         else if(!root1 || !root2)
             return false;
-        if(root1->val==root2->val){
-            bool left=mirror(root1->left,root2->right);
-            bool right=mirror(root1->right,root2->left);
-            return left && right;
-        }
-        return false;
+        else if(root1->val!=root2->val)
+            return false;
+        return mirror(root1->left,root2->right) && mirror(root1->right,root2->left);
     }
 public:
     bool isSymmetric(TreeNode* root) {
