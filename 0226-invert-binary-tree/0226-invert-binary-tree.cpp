@@ -10,6 +10,9 @@
  * };
  */
 class Solution {
+    
+// Approach 1
+/*
     TreeNode* tmp;
     void invert(TreeNode* root){
         if(!root)
@@ -25,4 +28,14 @@ public:
         invert(root);
         return root;
     }
+*/
+public:
+   TreeNode* invertTree(TreeNode* root){
+        if(!root)
+            return root;
+        invertTree(root->left);
+        invertTree(root->right);
+        swap(root->left,root->right);
+        return root;
+   }  
 };
