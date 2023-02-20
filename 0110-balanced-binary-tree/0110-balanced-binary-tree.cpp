@@ -10,21 +10,21 @@
  * };
  */
 class Solution {
-    pair<bool,int> balance(TreeNode* root){
+    bool ans=true;
+    int balance(TreeNode* root){
         if(!root)
-            return {true,0};
-        auto left=balance(root->left);
-        auto right=balance(root->right);
-        int height=max(left.second,right.second)+1;
-        if(left.first && right.first && abs(left.second-right.second)<=1){
-            return {true,height};
+            return 0;
+        int left=balance(root->left);
+        int right=balance(root->right);
+        if(abs(left-right)>1){
+            ans=false;
+            return 0;
         }
-        else 
-            return {false,height};
+        return max(left,right)+1;
     }
 public:
     bool isBalanced(TreeNode* root) {
-        auto ans=balance(root);
-        return ans.first;
+        int h=balance(root);
+        return ans;
     }
 };
