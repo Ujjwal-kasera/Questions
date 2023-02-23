@@ -16,6 +16,7 @@ class Solution {
     // }
     
 public:
+    
     // Recursion
     // int minCostClimbingStairs(vector<int>& cost) {
     //     int len=cost.size();
@@ -38,14 +39,28 @@ public:
     // }
     
     // Tabulation
+    // int minCostClimbingStairs(vector<int>& cost) {
+    //     int len=cost.size();
+    //     vector<int>dp(len);
+    //     dp[0]=cost[0];
+    //     dp[1]=cost[1];
+    //     for(int i=2;i<len;i++)
+    //         dp[i]=min(dp[i-1],dp[i-2])+cost[i];
+    //     return dp[len-1]<dp[len-2]?dp[len-1]:dp[len-2];
+    // }
+    
+     // Space Optimisation
     int minCostClimbingStairs(vector<int>& cost) {
         int len=cost.size();
-        vector<int>dp(len);
-        dp[0]=cost[0];
-        dp[1]=cost[1];
-        for(int i=2;i<len;i++)
-            dp[i]=min(dp[i-1],dp[i-2])+cost[i];
-        return dp[len-1]<dp[len-2]?dp[len-1]:dp[len-2];
+        int prev2=cost[0];
+        int prev1=cost[1];
+        int curr;
+        for(int i=2;i<len;i++){
+            curr=min(prev1,prev2)+cost[i];
+            prev2=prev1;
+            prev1=curr;
+        }
+        return min(prev1,prev2);
     }
     
 };
