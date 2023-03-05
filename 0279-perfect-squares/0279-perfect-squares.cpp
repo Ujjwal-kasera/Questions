@@ -26,7 +26,7 @@ public:
             sqr=sqrt(i);
             for(int j=1;j<=sqr;j++){
                 idx=i-(j*j);
-                if(idx>=0 && dp[idx]!=INT_MAX)
+                if(idx>=0)
                     dp[i]=min(dp[i],dp[idx]+1);
             }
         }
