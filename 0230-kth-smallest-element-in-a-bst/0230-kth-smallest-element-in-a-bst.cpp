@@ -17,6 +17,8 @@ public:
         while(root){
             if(!root->left){
                 res.push_back(root->val);
+                if(k==res.size())
+                    return res.back();
                 root=root->right;
             }
             else{
