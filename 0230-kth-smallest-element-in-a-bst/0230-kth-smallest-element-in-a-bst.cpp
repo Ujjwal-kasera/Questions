@@ -12,13 +12,12 @@
 class Solution {
 public:
     int kthSmallest(TreeNode* root, int k) {
-        vector<int> res;
         TreeNode* pred,*temp;
         while(root){
             if(!root->left){
-                res.push_back(root->val);
-                if(k==res.size())
-                    return res.back();
+                k--;
+                if(k==0)
+                    return root->val;
                 root=root->right;
             }
             else{
@@ -31,6 +30,6 @@ public:
                 temp->left=NULL;
             }
         }
-        return res[k-1];
+        return -1;
     }
 };
