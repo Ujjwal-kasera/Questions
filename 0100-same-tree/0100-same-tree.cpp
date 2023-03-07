@@ -11,7 +11,23 @@
  */
 class Solution {
 public:
-    bool isSameTree(TreeNode* p, TreeNode* q) {
+    
+    /* koi bi tree same tbhi hoga jb uska left subtree, right subtree
+        aur node ki value same ho.. agr aisa nhi h to wo same tree nhi h
+    */
+    
+    // bool isSameTree(TreeNode* p, TreeNode* q) {
+    //     if(p==NULL && q==NULL)
+    //         return true;
+    //     else if(p==NULL || q==NULL)
+    //         return false;
+    //     if(p->val!=q->val)
+    //         return false;
+    //     return isSameTree(p->left,q->left) && isSameTree(p->right,q->right);
+    // }
+    
+    // same logic with optimised code
+     bool isSameTree(TreeNode* p, TreeNode* q) {
         if(p==NULL && q==NULL)
             return true;
         else if(p==NULL || q==NULL)
