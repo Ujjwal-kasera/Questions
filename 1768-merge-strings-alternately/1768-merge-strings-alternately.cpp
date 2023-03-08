@@ -6,9 +6,9 @@ public:
         string res="";
         while(i<len1 || j<len2){
             if(i<len1)
-                res+=word1[i++];
+                res.push_back(word1[i++]);
             if(j<len2)
-                res+=word2[j++];
+                res.push_back(word2[j++]);
         }
         return res;
     }
