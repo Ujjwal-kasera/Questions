@@ -6,12 +6,12 @@ public:
         if(r==row-1 && c==col-1)
             return grid[r][c];
         if(r>=row || c>=col)
-            return INT_MAX;
+            return 1e9;
         if(dp[r][c]!=-1)
             return dp[r][c];
-        int down=solve(grid,r+1,c,dp);
-        int right=solve(grid,r,c+1,dp);
-        dp[r][c]=(min(right,down)+grid[r][c]);
+        int down=grid[r][c]+solve(grid,r+1,c,dp);
+        int right=grid[r][c]+solve(grid,r,c+1,dp);
+        dp[r][c]=(min(right,down));
         return dp[r][c];
     }
     int minPathSum(vector<vector<int>>& grid) {
