@@ -13,17 +13,15 @@ class Solution {
 public:
     int sum=0;
     void solve(TreeNode* root,bool isLeft){
-        if(!root->left && !root->right && isLeft){
-            sum+=root->val;
+        if(!root->left && !root->right){
+            if(isLeft)
+                sum+=root->val;
             return;
         }
-        else if(!root->left && !root->right && !isLeft)
-            return;
         if(root->left)
             solve(root->left,1);
         if(root->right)
             solve(root->right,0);
-        return ;
     }
     int sumOfLeftLeaves(TreeNode* root) {
         solve(root,0);
