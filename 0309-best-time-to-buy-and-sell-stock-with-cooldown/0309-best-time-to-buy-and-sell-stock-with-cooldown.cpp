@@ -21,52 +21,54 @@ public:
     // }
     
     // Tabulation
-    int solveTab(vector<int> &prices){
-        vector<vector<int>>dp(len+2,vector<int>(2,0));
-        for(int index=len-1;index>=0;index--){
-            for(int buy=1;buy>=0;buy--){
-                int profit1,profit2;
-                if(buy){
-                    profit1=-prices[index]+dp[index+1][0];
-                    profit2=dp[index+1][buy];
-                }
-                else{
-                    profit1=prices[index]+dp[index+2][1];
-                    profit2=dp[index+1][buy];
-                }
-                dp[index][buy]=max(profit1,profit2);
-            }
-        }
-        return dp[0][1];
-    }
-    
-    // Space Optimisation
-    // int solveSpace(vector<int> &prices){
-    //     vector<int>curr(2,0);
-    //     vector<int> next(2,0);
+    // int solveTab(vector<int> &prices){
+    //     vector<vector<int>>dp(len+2,vector<int>(2,0));
     //     for(int index=len-1;index>=0;index--){
     //         for(int buy=1;buy>=0;buy--){
     //             int profit1,profit2;
     //             if(buy){
-    //                 profit1=-prices[index]+next[0];
-    //                 profit2=next[buy];
+    //                 profit1=-prices[index]+dp[index+1][0];
+    //                 profit2=dp[index+1][buy];
     //             }
     //             else{
-    //                 profit1=prices[index]+next[1]-fees;
-    //                 profit2=next[buy];
+    //                 profit1=prices[index]+dp[index+2][1];
+    //                 profit2=dp[index+1][buy];
     //             }
-    //             curr[buy]=max(profit1,profit2);
+    //             dp[index][buy]=max(profit1,profit2);
     //         }
-    //         next=curr;
     //     }
-    //     return curr[1];
+    //     return dp[0][1];
     // }
+    
+    // Space Optimisation
+    int solveSpace(vector<int> &prices){
+        vector<int>curr(2,0);
+        vector<int> next(2,0);
+        vector<int> next2(2,0);
+        for(int index=len-1;index>=0;index--){
+            for(int buy=1;buy>=0;buy--){
+                int profit1,profit2;
+                if(buy){
+                    profit1=-prices[index]+next[0];
+                    profit2=next[buy];
+                }
+                else{
+                    profit1=prices[index]+next2[1];
+                    profit2=next[buy];
+                }
+                curr[buy]=max(profit1,profit2);
+            }
+            next2=next;
+            next=curr;
+        }
+        return curr[1];
+    }
     
     int maxProfit(vector<int>& prices) {
         len=prices.size();
         // vector<vector<int>> dp(len,vector<int>(2,-1));
         // return solveMem(prices,0,1,dp);
-        return solveTab(prices);
-        // return solveSpace(prices);
+        // return solveTab(prices);
+        return solveSpace(prices);
     }
 };
