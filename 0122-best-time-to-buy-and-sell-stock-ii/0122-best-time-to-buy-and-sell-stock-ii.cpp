@@ -32,7 +32,7 @@ public:
     //hm isme har ek value ek lie bool leke chl rhe ke kya hm use krid skte h ya nhi
     
     // Memoziation
-    // int len;
+    int len;
     // int solveMem(vector<int>& prices,bool buy,int index,vector<vector<int>> &dp){
     //     if(index>=len){
     //         return 0;
@@ -54,30 +54,53 @@ public:
     // }
      
     // Tabulation
-    int solveTab(vector<int>&prices){
-        int len=prices.size();
-        vector<vector<int>> dp(len+1,vector<int>(2,0));
+    // int solveTab(vector<int>&prices){
+    //     int len=prices.size();
+    //     vector<vector<int>> dp(len+1,vector<int>(2,0));
+    //     for(int index=len-1;index>=0;index--){
+    //         for(int buy=0;buy<2;buy++){
+    //             int profit1,profit2;
+    //             if(buy){
+    //                 profit1=dp[index+1][0]-prices[index];
+    //                 profit2=dp[index+1][1];
+    //             }
+    //             else{
+    //                 profit1=prices[index]+dp[index+1][1];
+    //                 profit2=dp[index+1][0];
+    //             }
+    //             dp[index][buy]=max(profit1,profit2);
+    //         }
+    //     }
+    //     return dp[0][1];
+    // }
+    
+    //Space Optimised
+    int solveSpace(vector<int> &prices){
+        vector<int> curr(2,0);
+        vector<int> next(2,0);
         for(int index=len-1;index>=0;index--){
             for(int buy=0;buy<2;buy++){
                 int profit1,profit2;
                 if(buy){
-                    profit1=dp[index+1][0]-prices[index];
-                    profit2=dp[index+1][1];
+                    profit1=next[0]-prices[index];
+                    profit2=next[1];
                 }
                 else{
-                    profit1=prices[index]+dp[index+1][1];
-                    profit2=dp[index+1][0];
+                    profit1=prices[index]+next[1];
+                    profit2=next[0];
                 }
-                dp[index][buy]=max(profit1,profit2);
+                curr[buy]=max(profit1,profit2);
             }
+            next=curr;
         }
-        return dp[0][1];
+        return curr[1];
     }
     int maxProfit(vector<int>& prices) {
-        // len=prices.size();
+        len=prices.size();
         // vector<vector<int>> dp(len,vector<int>(2,-1));
         // return solveMem(prices,1,0,dp);
-        return solveTab(prices);
+        // return solveTab(prices);
+        return solveSpace(prices);
     }
     /*
     // hm isme buy count ko maintain kr rhe agr to count even rha to hm buy krege
