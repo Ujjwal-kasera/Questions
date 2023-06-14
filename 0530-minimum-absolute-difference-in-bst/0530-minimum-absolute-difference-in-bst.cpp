@@ -11,25 +11,20 @@
  */
 class Solution {
 public:
-    priority_queue<int> pq;
+    vector<int> vec;
     void solve(TreeNode* root){
         if(!root)
             return;
-        pq.push(root->val);
         solve(root->left);
+        vec.push_back(root->val);
         solve(root->right);
     }
     int getMinimumDifference(TreeNode* root) {
         solve(root);
         int ans=1e9;
-        int a=pq.top(),b;
-        pq.pop();
-        while(pq.size()>0){
-            b=pq.top();
-            pq.pop();
-            ans=min(ans,a-b);
-            a=b;
-        }
+        int len=vec.size();
+        for(int i=0;i<len-1;i++)
+            ans=min(ans,vec[i+1]-vec[i]);
         return ans;
     }
 };
