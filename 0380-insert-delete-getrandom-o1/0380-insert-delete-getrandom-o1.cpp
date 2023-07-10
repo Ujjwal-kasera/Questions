@@ -1,6 +1,6 @@
 class RandomizedSet {
     vector<int> vec;
-    map<int,int> mp;
+    unordered_map<int,int> mp;
 public:
     RandomizedSet() {
         
@@ -10,7 +10,7 @@ public:
         if(mp.count(val)!=0)
             return 0;
         mp[val]=vec.size();
-        vec.emplace_back(val);
+        vec.push_back(val);
         return true;
     }
     
