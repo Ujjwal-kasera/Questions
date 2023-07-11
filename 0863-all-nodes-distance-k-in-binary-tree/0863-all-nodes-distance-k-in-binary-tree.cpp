@@ -9,7 +9,10 @@
  */
 class Solution {
 public:
+    vector<int> res;
+    set<int> visited;
     unordered_map<TreeNode*,TreeNode*> parent;
+    
     void buildParent(TreeNode* root){
         if(!root)
             return;
@@ -20,12 +23,10 @@ public:
         buildParent(root->left);
         buildParent(root->right);
     }
-    vector<int> distanceK(TreeNode* root, TreeNode* target, int k) {
-        buildParent(root);
-        set<int> visited;
-        vector<int> res;
+    
+    void bfs(TreeNode* root,int k){
         queue<TreeNode*> q;
-        q.push(target);
+        q.push(root);
         int cnt=0,n;
         TreeNode* node;
         while(!q.empty()){
@@ -55,6 +56,34 @@ public:
             }
             ++cnt;
         }
+    }
+    
+    void dfs(TreeNode* root,int k){
+        if(k<0)
+            return;
+        if(k==0){
+            res.push_back(root->val);
+            return;
+        }
+        visited.insert(root->val);
+        if(root->left && !visited.count(root->left->val)){
+            dfs(root->left,k-1);
+            visited.insert(root->left->val);
+        }
+        if(root->right && !visited.count(root->right->val)){
+            dfs(root->right,k-1);
+            visited.insert(root->right->val);
+        }
+        if(parent[root] && !visited.count(parent[root]->val)){
+            dfs(parent[root],k-1);
+            visited.insert(parent[root]->val);
+        }
+    }
+    
+    vector<int> distanceK(TreeNode* root, TreeNode* target, int k) {
+        buildParent(root);
+        // bfs(target,k);
+        dfs(target,k);
         return res;
     }
 };
