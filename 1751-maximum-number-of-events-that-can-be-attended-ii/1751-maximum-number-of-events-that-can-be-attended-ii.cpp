@@ -1,25 +1,25 @@
 class Solution {
 public:
-    int bisectRight(vector<vector<int>>&events, int target) {
-        int left = 0, right = events.size();
-        while (left < right) {
-            int mid = (left + right) / 2;
-            if (events[mid][0] <= target) {
-                left = mid + 1;
-            } else {
-                right = mid;
-            }
-        }
-        return left;
-    }   
+    // int bisect(vector<vector<int>>&events, int target) {
+    //     int left = 0, right = events.size();
+    //     while (left < right) {
+    //         int mid = (left + right) / 2;
+    //         if (events[mid][0] <= target) {
+    //             left = mid + 1;
+    //         } else {
+    //             right = mid;
+    //         }
+    //     }
+    //     return left;
+    // }   
     int maxValue(vector<vector<int>>& events, int k) {
         int len=events.size();
         vector<vector<int>> dp(len+1,vector<int>(k+1,0));
         sort(events.begin(),events.end());
         vector<int> next(len,len);
         for(int i=0;i<len;i++){
-            next[i]=bisectRight(events,events[i][1]);
-            // next[i]=upper_bound(events.begin()+i,events.end(),vector<int>{events[i][1]+1,0,0})-events.begin();
+            // next[i]=bisectRight(events,events[i][1]);
+            next[i]=upper_bound(events.begin()+i,events.end(),vector<int>{events[i][1]+1,0,0})-events.begin();
         }
         
         for(int i=len-1;i>=0;i--){
