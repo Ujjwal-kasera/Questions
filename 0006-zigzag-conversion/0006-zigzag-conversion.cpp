@@ -1,7 +1,7 @@
 class Solution {
 public:
     string convert(string s, int numRows) {
-        if(numRows<=1)
+        if(numRows==1)
             return s;
         vector<string> vec(numRows,"");
         int len=s.size();
