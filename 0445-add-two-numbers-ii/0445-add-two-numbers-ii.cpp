@@ -10,37 +10,37 @@
  */
 class Solution {
 public:
-    ListNode* reverse(ListNode* head) {
-        ListNode* temp=head,*newhead=head;
+    ListNode* reverse(ListNode* head){
+        ListNode* newhead=head,*tmp=head;
         while(head && head->next){
-            temp=temp->next;
-            head->next=temp->next;
-            temp->next=newhead;
-            newhead=temp;
-            temp=head;
+            tmp=tmp->next;
+            head->next=tmp->next;
+            tmp->next=newhead;
+            newhead=tmp;
+            tmp=head;
         }
         return newhead;
     }
     ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
         l1=reverse(l1);
         l2=reverse(l2);
-        int sum,carry=0;
-        ListNode* head=new ListNode();
-        ListNode* prev=head;
-        while(l1!=NULL || l2!=NULL || carry){
+        int sum,carry;
+        ListNode *head=new ListNode(-1);
+        ListNode *prev=head;
+        while(l1 || l2 || carry){
             sum=0;
-            if(l1!=NULL){
+            if(l1){
                 sum+=l1->val;
                 l1=l1->next;
             }
-            if(l2!=NULL){
+            if(l2){
                 sum+=l2->val;
                 l2=l2->next;
             }
             sum+=carry;
             carry=sum/10;
-            ListNode* _next=new ListNode(sum%10);
-            prev->next=_next;
+            ListNode* tmp=new ListNode(sum%10);
+            prev->next=tmp;
             prev=prev->next;
         }
         return reverse(head->next);
