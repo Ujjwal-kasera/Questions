@@ -5,13 +5,14 @@ public:
             return s;
         vector<string> vec(numRows,"");
         int len=s.size();
-        int row=0,dir=-1;
+        int row=0;
+        bool flag=0;
         for(int i=0;i<len;i++){
             if(row==0 || row==numRows-1)
-                dir*=-1;
+                flag=!flag;
             vec[row]+=s[i];
             
-            if(dir==1)
+            if(flag)
                 row++;
             else
                 row--;
