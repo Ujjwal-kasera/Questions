@@ -3,11 +3,11 @@ public:
     string removeStars(string s) {
         string res="";
         int len=s.size();
-        for(auto ch:s){
-            if(ch=='*')
+        for(int i=0;i<len;i++){
+            if(s[i]=='*')
                 res.pop_back();
             else
-                res+=ch;
+                res+=s[i];
         }
         return res;
     }
