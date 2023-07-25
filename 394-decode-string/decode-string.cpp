@@ -1,6 +1,8 @@
 #include<bits/stdc++.h>
 class Solution {
 public:
+    // TC=O(N)
+    // SC=O(N)
     string decodeString(string s) {
         string currStr="";
         string currNum="";
