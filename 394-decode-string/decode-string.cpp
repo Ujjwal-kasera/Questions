@@ -2,47 +2,82 @@
 class Solution {
 public:
     string decodeString(string s) {
-        string res="",temp;
-        string num="";
-        int n;
-        char ch;
+        string currStr="";
+        string currNum="";
+        int prevNum=0;
+        string prevStr="";
         int len=s.size();
         stack<string> st;
         for(int i=0;i<len;i++){
-            temp=s[i];
             if(isdigit(s[i])){
-                num+=s[i];
-                continue;
+                currNum+=s[i];
             }
             else if(s[i]=='['){
-                st.push(num);
-                num="";
-                st.push(temp);
+                st.push(currStr);
+                st.push(currNum);
+                currStr="";
+                currNum="";
             }
             else if(s[i]==']'){
-                temp="";
-                while(st.top()!="["){
-                    temp+=st.top();
-                    st.pop();
-                }
+                prevNum=stoi(st.top());
                 st.pop();
-                n=stoi(st.top());
+                prevStr=st.top();
                 st.pop();
-                res="";
-                while(n--){
-                    res+=temp;
+                while(prevNum--){
+                    prevStr+=currStr;
                 }
-                st.push(res);
+                currStr=prevStr;
             }
             else
-                st.push(temp);
+                currStr+=s[i];
         }
-        res="";
-        while(!st.empty()){
-            res+=st.top();
-            st.pop();
-        }
-        reverse(res.begin(),res.end());
-        return res;
+        return currStr;
     }
+
+    // TC=O(N2)
+    // SC=O(N)
+    // string decodeString(string s) {
+    //     string res="",temp;
+    //     string num="";
+    //     int n;
+    //     char ch;
+    //     int len=s.size();
+    //     stack<string> st;
+    //     for(int i=0;i<len;i++){
+    //         temp=s[i];
+    //         if(isdigit(s[i])){
+    //             num+=s[i];
+    //             continue;
+    //         }
+    //         else if(s[i]=='['){
+    //             st.push(num);
+    //             num="";
+    //             st.push(temp);
+    //         }
+    //         else if(s[i]==']'){
+    //             temp="";
+    //             while(st.top()!="["){
+    //                 temp+=st.top();
+    //                 st.pop();
+    //             }
+    //             st.pop();
+    //             n=stoi(st.top());
+    //             st.pop();
+    //             res="";
+    //             while(n--){
+    //                 res+=temp;
+    //             }
+    //             st.push(res);
+    //         }
+    //         else
+    //             st.push(temp);
+    //     }
+    //     res="";
+    //     while(!st.empty()){
+    //         res+=st.top();
+    //         st.pop();
+    //     }
+    //     reverse(res.begin(),res.end());
+    //     return res;
+    // }
 };
