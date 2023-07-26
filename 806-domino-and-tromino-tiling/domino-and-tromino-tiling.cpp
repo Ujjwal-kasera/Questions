@@ -13,7 +13,6 @@ public:
         dp[n]%=mod;
         dp[n]+=solve(n-3,dp)%mod;
         dp[n]%=mod;
-        // return dp[n]=((2*(numTilings(n-1)%mod))%mod+numTilings(n-3)%mod)%mod;
         return dp[n];
     }
     int numTilings(int n) {
