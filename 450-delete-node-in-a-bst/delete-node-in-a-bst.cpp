@@ -13,16 +13,22 @@ class Solution {
 public:
     TreeNode* nodeDelete(TreeNode* root){
         TreeNode* tmp;
+
+        // Left child is only present
         if(root->left && !root->right){
             tmp=root->left;
             delete(root);
             return tmp;
         }
+
+        // Right child is only present
         else if(!root->left && root->right){
             tmp=root->right;
             delete(root);
             return tmp;
         }
+
+        // Both child are present
         else if(root->left && root->right){
             tmp=root->right;
             cout<<tmp->val<<endl;
@@ -34,19 +40,24 @@ public:
             root->right=deleteNode(root->right,tmp->val);
             return root;
         }
+
+        // Leaf node
         delete(root);
         return NULL;
     }
     TreeNode* deleteNode(TreeNode* root, int key) {
        if(!root)
             return NULL;
-            
+
+        // delete function
         if(root->val==key)
             return nodeDelete(root); //delete function
 
+        // to check if key is in left subtree 
         else if(key<root->val)
             root->left=deleteNode(root->left,key);
-
+        
+        // to check if key is in left subtree
         else
             root->right=deleteNode(root->right,key);
 
