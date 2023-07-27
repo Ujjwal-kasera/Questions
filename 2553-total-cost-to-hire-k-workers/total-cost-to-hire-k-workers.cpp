@@ -14,19 +14,7 @@ public:
         }
         ll cost=0;
         while(k--){
-            if(first.empty()){
-                cost+=last.top();
-                last.pop();
-                if(inF<=inL)
-                    last.push(costs[inL--]);
-            }
-            else if(last.empty()){
-                cost+=first.top();
-                first.pop();
-                if(inF<=inL)
-                    first.push(costs[inF++]);
-            }
-            else if(first.top()<=last.top()){
+            if(last.empty() || (!first.empty()) && first.top()<=last.top()){
                 cost+=first.top();
                 first.pop();
                 if(inF<=inL)
