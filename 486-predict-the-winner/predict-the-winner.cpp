@@ -33,25 +33,42 @@ public:
     // }
 
     // Tabulation
-    int solveTab(vector<int>& nums){
+    // int solveTab(vector<int>& nums){
+    //     int len=nums.size();
+    //     vector<vector<int>>dp(len,vector<int>(len,0));
+    //     for(int i=0;i<len;i++){
+    //         dp[i][i]=nums[i];
+    //     }
+    //     int start,end,e;
+    //     for(int d=1;d<len;d++){
+    //         for(int s=0;s<len-d;s++){
+    //             e=s+d;
+    //             start=nums[s]-dp[s+1][e];
+    //             end=nums[e]-dp[s][e-1];
+    //             dp[s][e]=max(start,end);
+    //         }
+    //     }
+    //     return dp[0][len-1]>=0;
+    // }
+
+    // Space Optimisation
+    int solveSpace(vector<int>& nums){
         int len=nums.size();
-        vector<vector<int>>dp(len,vector<int>(len,0));
-        for(int i=0;i<len;i++){
-            dp[i][i]=nums[i];
-        }
+        vector<int> dp(nums.begin(),nums.end());
         int start,end,e;
         for(int d=1;d<len;d++){
             for(int s=0;s<len-d;s++){
                 e=s+d;
-                start=nums[s]-dp[s+1][e];
-                end=nums[e]-dp[s][e-1];
-                dp[s][e]=max(start,end);
+                start=nums[s]-dp[s+1];
+                end=nums[e]-dp[s];
+                dp[s]=max(start,end);
             }
         }
-        return dp[0][len-1]>=0;
+        return dp[0]>=0;
     }
     bool PredictTheWinner(vector<int>& nums) {
-        return solveTab(nums);
+        return solveSpace(nums);
+        // return solveTab(nums);
         // int len=nums.size();
         // vector<vector<int>>dp(len,vector<int>(len,-1));
         // return solveMem(nums,0,len-1,dp)>=0;
