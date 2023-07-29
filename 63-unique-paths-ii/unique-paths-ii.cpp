@@ -13,10 +13,8 @@ public:
         // Down
         int ans=0;
         ans+=solveMem(obstacleGrid,x+1,y,dp);
-
         // Right
         ans+=solveMem(obstacleGrid,x,y+1,dp);
-
         return dp[x][y]=ans;
     }
     int uniquePathsWithObstacles(vector<vector<int>>& obstacleGrid) {
