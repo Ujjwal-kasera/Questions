@@ -1,5 +1,6 @@
 class Solution {
 public:
+    // Same code as below But Better TC 
     vector<vector<int>>ans;
     void solve(int index,int k,int n,vector<int> &vec){
         if(!k || !n){
@@ -20,7 +21,7 @@ public:
         solve(1,k,n,tmp);
         return ans;
     }
-    
+
     // void solve(int index,int k,int n,vector<int> vec){
     //     if(k==0 ||  n==0){
     //         if(k==0 && n==0)
