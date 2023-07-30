@@ -4,22 +4,6 @@ public:
     int srcX,srcY;
     int destiX,destiY;
     int lenX,lenY;
-    void traverse(vector<vector<int>>&grid){
-        for(int x=0;x<lenX;x++){
-            for(int y=0;y<lenY;y++){
-                if(grid[x][y]==2){
-                    destiX=x;
-                    destiY=y;
-                }
-                if(grid[x][y]==1){
-                    srcX=x;
-                    srcY=y;
-                }
-                if(grid[x][y]==0)
-                    empty++;
-            }
-        }
-    }
     int solveRec(vector<vector<int>>&grid,int x,int y,int emp){
         if(x<0 || x==lenX || y<0 || y==lenY)
             return 0;
@@ -45,7 +29,20 @@ public:
     int uniquePathsIII(vector<vector<int>>& grid) {
         lenX=grid.size();
         lenY=grid[0].size();
-        traverse(grid);
+        for(int x=0;x<lenX;x++){
+            for(int y=0;y<lenY;y++){
+                if(grid[x][y]==2){
+                    destiX=x;
+                    destiY=y;
+                }
+                if(grid[x][y]==1){
+                    srcX=x;
+                    srcY=y;
+                }
+                if(grid[x][y]==0)
+                    empty++;
+            }
+        }
         return solveRec(grid,srcX,srcY,empty);
     }
 };
