@@ -10,7 +10,7 @@
  */
 class Solution {
 public:
-    ListNode* findMid(ListNode* head){
+    ListNode* findMid(ListNode* &head){
         ListNode* slow=head;
         ListNode* fast=head->next;
         while(fast!=NULL && fast->next!=NULL){
@@ -19,7 +19,7 @@ public:
         }
         return slow;
     }
-    ListNode* merge(ListNode* left,ListNode* right){
+    ListNode* merge(ListNode* &left,ListNode* &right){
         if(left==NULL){
             return right;
         }
