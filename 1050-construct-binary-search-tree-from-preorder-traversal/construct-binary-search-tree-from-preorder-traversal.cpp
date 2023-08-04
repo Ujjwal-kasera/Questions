@@ -20,4 +20,15 @@ public:
         root->right=bstFromPreorder(preorder,maxi);
         return root; 
     }
+    // TreeNode* buildTree(vector<int>&preorder,int maxi){
+    //     if(index==preorder.size() || preorder[index]>maxi)
+    //         return NULL;
+    //     TreeNode* root=new TreeNode(preorder[index++]);
+    //     root->left=buildTree(preorder,root->val);
+    //     root->right=buildTree(preorder,maxi);
+    //     return root;
+    // }
+    // TreeNode* bstFromPreorder(vector<int>& preorder){
+    //     return buildTree(preorder,INT_MAX);
+    // }
 };
