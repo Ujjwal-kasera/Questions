@@ -8,10 +8,10 @@ public:
         while(i<len){
             str="",cnt=0;
             while(i<len && cnt<k){
-                str+=s[i++];
+                str=s[i++]+str;
                 cnt++;
             }
-            reverse(str.begin(),str.end());
+            // reverse(str.begin(),str.end());
             res+=str;
             cnt=0;
             while(i<len && cnt<k){
