@@ -1,31 +1,31 @@
 class Solution {
 public:
     bool wordPattern(string pattern, string s) {
-        unordered_map<char,string> c2s;
-        unordered_map<string,char> s2c;
-        int len=pattern.size();
-        int n=s.size();
-        int index=0;
+        unordered_map<char,string> p2s;
+        unordered_map<string,char> s2p;
+        int pat_len=pattern.size();
+        int str_len=s.size();
+        int idx=0;
         string tmp="";
-        for(int i=0;i<len;++i){
-            if(index<n){
-                while(index<n && s[index]!=' '){
-                    tmp+=s[index];
-                    index++;
+        for(int i=0;i<pat_len;++i){
+            if(idx<str_len){
+                while(idx<str_len && s[idx]!=' '){
+                    tmp+=s[idx];
+                    idx++;
                 }
             }
             else 
                 return false;
-            index++;
-            if(c2s.count(pattern[i]) && c2s[pattern[i]]!=tmp)
+            idx++;
+            if(p2s.count(pattern[i]) && p2s[pattern[i]]!=tmp)
                 return false;
-            if(s2c.count(tmp) && s2c[tmp]!=pattern[i])
+            if(s2p.count(tmp) && s2p[tmp]!=pattern[i])
                 return false;
-            c2s[pattern[i]]=tmp;
-            s2c[tmp]=pattern[i];
+            p2s[pattern[i]]=tmp;
+            s2p[tmp]=pattern[i];
             tmp="";
         }
-        if(index>=n)
+        if(idx>=str_len)
             return true;
         return false;
     }
