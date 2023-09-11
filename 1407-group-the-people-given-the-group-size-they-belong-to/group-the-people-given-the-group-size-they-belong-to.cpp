@@ -6,17 +6,16 @@ public:
             mp[groupSizes[i]].push_back(i);
         }
         vector<vector<int>> res;
+        int idx;
         vector<int> temp;
         for(auto [len,vec]:mp){
-            cout<<len<<endl;
-            while(vec.size()>0){
-                temp.clear();
-                for(int i=0;i<len;++i){
-                    temp.push_back(vec.back());
-                    vec.pop_back();
+            idx=0;
+            while(idx<vec.size()){
+                temp.push_back(vec[idx++]);
+                if(temp.size()==len){
+                    res.push_back(temp);
+                    temp.clear();
                 }
-                cout<<"HI"<<endl;
-                res.push_back(temp);
             }
         }
         return res;
